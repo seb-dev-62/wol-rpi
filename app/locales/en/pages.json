@@ -1,0 +1,20 @@
+{
+  "myServers": {
+    "title": "My Servers"
+  },
+
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "author": "Author"
+  },
+
+  "dashboard": {
+    "title": "Dashboard",
+    "account": "Account",
+    "system": "System",
+    "servers": "Servers",
+    "logout": "Log out"
+  }
+}

@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  idusers       Int      @id @default(autoincrement())
+  username      String   @unique
+  password      String
+  firstAdmin    Boolean  @default(false)
+  creation_date DateTime @default(now())
+  last_edit     DateTime @default(now())
+  role          String   @default("user")
+  email         String
+  devices       devices[]
+}
+
+model devices {
+  iddevices     Int      @id @default(autoincrement())
+  name          String   @unique
+  description   String?  @default("Just a server")
+  last_edit     DateTime @default(now())
+  is_public     Boolean  @default(true)
+  mac           String   @unique
+  broadcast     String
+  port          Int      @default(9)
+  idusers       Int
+  users         users    @relation(fields: [idusers], references: [idusers])
+}
+
+model system {
+  idsystem      Int      @id @default(autoincrement())
+  name          String
+}
