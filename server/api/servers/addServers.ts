@@ -7,12 +7,24 @@ export default defineEventHandler(async (e: H3Event) => {
   const body = await readBody(e)
   const { name, description, mac, broadcast, port, isPublic, idCreator } = body
 
-  if(!name || !mac || !broadcast || !port || isPublic === undefined){
-    return { success: false, message: 'All fields are required.'}
+  if(!name){
+    return { success: false, message: 'Name is required.'}
   }
 
-  if(!idCreator){
-    return { success: false, message: 'Your ID could\'t be retrieved' }
+  if(!broadcast){
+    return { success: false, message: 'Broadcast is required.'}
+  }
+
+  if(!mac){
+    return { success: false, message: 'Mac is required.'}
+  }
+
+  if(!port){
+    return { success: false, message: 'Port is required.'}
+  }
+
+  if(!idCreator){    
+    return { success: false, message: 'Your ID couldn\'t be retrieved' }
   }
 
   const existingServer = await prisma.devices.findFirst({
@@ -41,7 +53,7 @@ export default defineEventHandler(async (e: H3Event) => {
     })
     
     updateServerDate()
-    return { success: true }
+    return { success: true, message: `Server ${name} added.` }
   } catch (err) {
     console.error('Error while creating the server : ', err)
     return { success: false }

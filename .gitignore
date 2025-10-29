@@ -25,5 +25,7 @@ logs
 
 .data
 
-app/server/db/*.db
+/prisma/prisma/*.db
+/prisma/server/*.db
+
 /app/generated/prisma

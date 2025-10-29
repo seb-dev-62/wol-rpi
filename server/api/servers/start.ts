@@ -1,7 +1,7 @@
 import { H3Event, readBody } from 'h3'
+import * as wol from 'wol'
 
 export default defineEventHandler(async (e: H3Event) => {
-  const wol = require('wol')
   const body = await readBody(e)
 
   try{

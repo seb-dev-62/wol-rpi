@@ -45,6 +45,11 @@ const userMenu = computed<DropdownMenuItem[][]>(() => {
         requiredRole: 'admin' as const,
         children: [
           {
+            label: 'Add user',
+            icon: 'i-lucide-user-plus',
+            to: '/u/add-user'
+          },
+          {
             label: 'System',
             icon: 'i-lucide-monitor-cog',
             to: '/s/settings',
@@ -52,7 +57,7 @@ const userMenu = computed<DropdownMenuItem[][]>(() => {
           {
             label: 'Manage user',
             icon: 'i-lucide-user-cog',
-            to: 'u/manage-user'
+            to: '/u/manage-user'
           }
         ]
       }
@@ -88,7 +93,7 @@ const userMenu = computed<DropdownMenuItem[][]>(() => {
 
 
 
-// Content in the side bar
+// Content in the side bar. Not collapsed.
 const sideItems: NavigationMenuItem[][] = [[{
   label: 'Servers',
   icon: 'i-lucide-server',
@@ -125,16 +130,16 @@ const CollapsedSystemName = Array.from(SystemName)[0]
 
 
       <!-- Side bar content -->
-      <template #default>
+      <template #default="collapsed">
 
         <!-- Top content -->
-        <UNavigationMenu 
+        <UNavigationMenu
           :items="sideItems[0]"
           orientation="vertical"/>
 
 
         <!-- Bottom content -->
-         <UNavigationMenu 
+         <UNavigationMenu
           :items="sideItems[1]"
           orientation="vertical"
           class="mt-auto"/>

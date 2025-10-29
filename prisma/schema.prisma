@@ -21,7 +21,7 @@ model users {
   creation_date DateTime @default(now())
   last_edit     DateTime @default(now())
   role          String   @default("user")
-  email         String
+  email         String?  @default("No email")
   devices       devices[]
 }
 
@@ -40,5 +40,16 @@ model devices {
 
 model system {
   idsystem      Int      @id @default(autoincrement())
-  name          String
+  name          String   @default("WOL-RPI")
+  api_refresh   Int      @default(3000)
+}
+
+model userCode {
+  idusercode    Int      @id @default(autoincrement())
+  code          String   @unique
+  username      String   @unique
+  createdAt     DateTime @default(now())
+  expiresAt     DateTime?
+  role          String   @default("user")
+  isActivated   Boolean  @default(false)
 }

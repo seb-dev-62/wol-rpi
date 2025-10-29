@@ -9,11 +9,6 @@ const { showPwd, togglePassword } = PasswordVisibility()
 const { showMessage } = messageToast()
 
 const router = useRouter()
-import { useAuth } from '~/composables/user/user'
-const {username}=useAuth()
-if(username){
-  console.log('Logged in');
-}
 
 useHead({
   title: 'Login'
@@ -59,7 +54,6 @@ async function logData(e: FormSubmitEvent<UserSchema>){
   }
 
   console.log(e);
-  
 }
 </script>
 
@@ -100,11 +94,13 @@ async function logData(e: FormSubmitEvent<UserSchema>){
             class="mt-2 w-full text-center"
             type="submit"
           />
+
+          <p class="mt-4">Don't have account ? Let's <ULink to="/register">create one!</ULink></p>
         </UForm>
       </div>
 
       <template #footer>
-        Author <ULink to="https://github.com/sebastien62400" target="_blank">Sebastien Dufour</ULink>
+        Author <ULink to="https://github.com/seb-dev-62" target="_blank">Sebastien Dufour</ULink>
       </template>
     
     </UCard>

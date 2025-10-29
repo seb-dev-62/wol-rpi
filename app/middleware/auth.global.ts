@@ -2,7 +2,7 @@ import { defineNuxtRouteMiddleware, navigateTo } from '#app'
 
 export default defineNuxtRouteMiddleware(async (to) => {
 
-  const publicLinks = ['/login', '/create-admin']
+  const publicLinks = ['/login', '/create-admin', '/register']
   const isPublicPage = publicLinks.includes(to.path)
 
   try {
@@ -21,7 +21,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
       }
     
       if (!auth && !isPublicPage) {
-        console.log('Not authenticated.')
         return navigateTo('/login')
       }
     }

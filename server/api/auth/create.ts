@@ -1,12 +1,17 @@
 import { PrismaClient } from "@prisma/client"
 import { H3Event, readBody } from 'h3'
 import bcrypt from 'bcrypt'
-
-const prisma = new PrismaClient()
+import { csrf_verif } from "#imports"
 
 export default defineEventHandler(async (e: H3Event) => {
+  const prisma = new PrismaClient()
   const body = await readBody(e)
-  const { username, password, email, firstAdmin, role } = body
+  const { username, password, email, firstAdmin, role, csrfToken } = body
+  const sessionID = getCookie(e, 'session_id') || 'guest'
+
+  if(!csrf_verif(sessionID, csrfToken)){
+    return { success: false, message: "Invalid CSRF token", statusCode: 403 }
+  }
 
   if(!username || !password) {
     return { success: false, message: 'Some fields are missing.' }

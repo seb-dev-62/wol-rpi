@@ -7,6 +7,12 @@ export default defineEventHandler(async (e: H3Event) => {
   const prisma = new PrismaClient()
   const body = await readBody(e)
   const { username, password } = body
+  const { csrfToken } = await $fetch('/api/secure/csrf')
+  const sessionID = getCookie(e, 'session_id') || 'guest'
+
+  if(!csrf_verif(sessionID, csrfToken)){
+    throw createError({ statusCode: 403, message: 'Invalid CSRF token' })
+  }
 
   const user = await prisma.users.findUnique({ where: { username } })
   if(!user){

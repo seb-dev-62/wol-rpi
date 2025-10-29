@@ -1,37 +1,47 @@
 import { messageToast } from "../messages/message"
 import { useAuth } from '~/composables/user/user'
 import { useServerDetails } from "./getServerDetails"
-import type { editableServer } from "./serverState"
+import type { addingServer, fullServerDetails } from "./serverState"
+// import { useHeartbeat } from "../../../server/api/heartbeat/heartbeat"
 
-export const useAddServers = (serverState: Ref<editableServer>) => {
+export const useAddServers = (serverState: Ref<addingServer>) => {
   const { showMessage } = messageToast()
   const { getServerDetails } = useServerDetails()
+  // const { HeartbeatMaker } = useHeartbeat()
   const { idUser } = useAuth()
 
   const addServers = async () =>{
-    
+    const { csrfToken } = await $fetch('/api/secure/csrf')
+
     try{
-      const res = await $fetch<{ success: boolean }>('/api/servers/addServers', {
+      const res = await $fetch<{ success: boolean, message: string }>('/api/servers/addServers', {
         method: 'POST',
-        body: serverState.value
+        body: {
+          name: serverState.value.name,
+          description: serverState.value.description,
+          mac: serverState.value.mac,
+          broadcast: serverState.value.broadcast,
+          port: serverState.value.port,
+          idCreator: idUser.value,
+          csrfToken
+        }
       })
 
       if(res.success){
         await getServerDetails()
-        showMessage('success', 'Server added.')
+        // await HeartbeatMaker(serverState.value.id)
+        showMessage('success', res.message)
 
         serverState.value = {
-          id: 0,
           name: '',
           description: '',
           mac: '',
           broadcast: '',
           port: '9',
-          isPublic: true,
-          idCreator: idUser.value
+          isPublic: true
         }
       } else {
-        showMessage('error', 'Error while adding the server.')
+        showMessage('error', res.message)
       }
     } catch (err) {
       console.error('Error while sending the state to the server : ', err)

@@ -8,7 +8,7 @@ export interface fullServerDetails {
   mac: string,
   broadcast: string,
   port: '7' | '9',
-  isPublic: boolean,
+  isPublic: boolean
 }
 
 export interface editableServer {
@@ -20,6 +20,15 @@ export interface editableServer {
   port: '7' | '9',
   isPublic: boolean,
   idCreator: number
+}
+
+export interface addingServer {
+  name: string,
+  description: string,
+  mac: string,
+  broadcast: string,
+  port: '7' | '9',
+  isPublic: boolean,
 }
 
 export interface deleteServer {
@@ -43,10 +52,19 @@ export const useServerData = () => {
     idCreator: idUser.value
   }))
 
+  const addServerState = useState<addingServer>('addServerState', () => ({
+    name: '',
+    description: '',
+    mac: '',
+    broadcast: '',
+    port: '9',
+    isPublic: true
+  }))
+
   const deleteServerState = useState<deleteServer>('deleteServerState', () => ({
     id: 0,
     name: ''
   }))
 
-  return { serverList, serverState, deleteServerState }
+  return { serverList, serverState, deleteServerState, addServerState }
 }

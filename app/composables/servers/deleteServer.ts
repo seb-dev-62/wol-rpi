@@ -7,12 +7,15 @@ export const useDeleteServers = (serverState: Ref<deleteServer>) => {
   const { getServerDetails } = useServerDetails()
 
   const deleteServer = async () =>{
-    console.log('ID of the server to delete : ' + serverState.value.id);
+    const { csrfToken } = await $fetch('/api/secure/csrf')
     
     try{
       const res = await $fetch<{ success: boolean }>('/api/servers/deleteServers', {
         method: 'DELETE',
-        body: {id: serverState.value.id}
+        body: {
+          id: serverState.value.id,
+          csrfToken
+        }
       })
 
       if(res.success){

@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { useRouter } from '#vue-router'
 import { z } from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui'
-import { onMounted } from 'vue'
 import { PasswordVisibility } from '~/composables/forms/PasswordVisibility'
 import { messageToast } from '~/composables/messages/message'
 
@@ -13,23 +10,20 @@ useHead({
   title: 'Setup'
 })
 
-const router = useRouter()
-
 // Verify user data
-
 const userData = z.object({
-  username: z.string().min(1,'Please enter a username.'),
+  username: z.string('You should write something.').min(1,'Please enter a username.'),
 
   email: z.string().email('Please enter valid email.').optional(),
 
-  password: z.string()
+  password: z.string('You should have a password')
              .regex(/[A-Z]/, 'Must contain at least one uppercase letter')
              .regex(/[a-z]/, 'Must contain at least one lowercase letter')
              .regex(/[0-9]/, 'Must contain at least one number')
              .regex(/[^A-Za-z0-9]/, 'Must contain at least one special character')
              .min(10, 'Must be at least 10 characters'),
   
-  rPassword: z.string()
+  rPassword: z.string('Repeat your password to continu.')
               .min(10, 'Must be at least 10 characters'),
     
   firstAdmin: z.boolean(),
@@ -39,15 +33,15 @@ const userData = z.object({
 type UserSchema = z.output<typeof userData>
 
 const state = reactive<Partial<UserSchema>>({
-  username: '',
-  email: '',
-  password: '',
-  rPassword: '',
+  username: undefined,
+  email: undefined,
+  password: undefined,
+  rPassword: undefined,
   firstAdmin: true,
   role: 'admin'
 })
 
-async function createAdmin(e: FormSubmitEvent<UserSchema>){
+async function createAdmin(){
   try{
     // Verify if passwords are the same before sending to the backend
     if(state.password !== state.rPassword){
@@ -88,7 +82,7 @@ async function createAdmin(e: FormSubmitEvent<UserSchema>){
       </template>
 
       <div>
-        <UForm :schema="userData" :state="state" @submit="createAdmin">
+        <UForm :schema="userData" :state="state" @submit="createAdmin()">
           <UFormField label="Username" name="username" required>
             <UInput v-model="state.username" class="w-full" required />
           </UFormField>
