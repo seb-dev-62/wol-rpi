@@ -7,7 +7,7 @@
 
 ### We'll install this on ubuntu server 24.04 LTS
 
-First, install the required dependecies if not install
+First, install the required dependencies if not installed
 
 ```bash
   sudo apt update && sudo apt upgrade
