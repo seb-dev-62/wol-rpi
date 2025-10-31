@@ -34,7 +34,7 @@ const state = reactive<Partial<UserSchema>>({
 
 async function logData(e: FormSubmitEvent<UserSchema>){
   try{
-    const res = await $fetch<{ success: boolean }>('/api/auth/login', {
+    const res = await $fetch<{ success: boolean, message: string }>('/api/auth/login', {
       method: 'POST',
       body: {
         username: state.username,
@@ -46,7 +46,7 @@ async function logData(e: FormSubmitEvent<UserSchema>){
       console.log('Logged in!');
       router.push('/')
     } else {
-      showMessage('error', 'Username or password incorrect.')
+      showMessage('error', res.message)
     }
   } catch (err) {
     console.log(err);

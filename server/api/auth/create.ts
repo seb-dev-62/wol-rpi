@@ -46,5 +46,7 @@ export default defineEventHandler(async (e: H3Event) => {
     console.log(err);
     
     return { success: false, message: 'An error has occured while creating the user.' }
+  } finally {
+    prisma.$disconnect()
   }
 })

@@ -16,12 +16,12 @@ export default defineEventHandler(async (e: H3Event) => {
 
   const user = await prisma.users.findUnique({ where: { username } })
   if(!user){
-    throw createError({ statusCode: 401, statusMessage: 'Username not found.' })
+    return { success: false, message: 'No user found.' }
   }
 
   const validPwd = await bcrypt.compare(password, user.password)
   if(!validPwd) {
-    throw createError({ statusCode: 401, statusMessage: 'Invalid password.' })
+    return { success: false, message: 'Invalid password.' }
   }
 
   const token = jwt.sign(

@@ -6,6 +6,8 @@ useHead({
   title: 'System settings'
 })
 
+
+
 const slider = ref(3)
 </script>
 

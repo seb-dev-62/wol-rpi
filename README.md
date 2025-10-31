@@ -1,75 +1,39 @@
-# Nuxt Minimal Starter
+# 0.3 WOL-RPI [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+## Requirements
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+- NodeJS v22.20 or newer
+- PM2 (lighter than Docker, run in background)
+## Installation
 
-## Setup
+### We'll install this on ubuntu server 24.04 LTS
 
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+First, install the required dependecies if not install
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+  sudo apt update && sudo apt upgrade
+  sudo apt install nodejs
+  sudo apt install -g pm2
 ```
 
-## Production
-
-Build the application for production:
+Now, let's install the project and start it.
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+  wget -O https://github/...
 ```
 
-Locally preview production build:
+Then, let's start it
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+  cd wol-rpi
+  pm2 start ./wol-rpi/server/index.mjs --name "wol-rpi"
+  pm2 save
+  pm2 startup
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Now, to access your server, just run
+
+```bash
+  ifconfig
+```
+
+And in your browser, just do http://your-rpi-address and your done.

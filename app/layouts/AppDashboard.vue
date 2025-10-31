@@ -117,7 +117,7 @@ const CollapsedSystemName = Array.from(SystemName)[0]
 
     
     <!-- Side bar -->
-    <UDashboardSidebar resizable collapsible mode="drawer">
+    <UDashboardSidebar resizable collapsible>
 
 
 
@@ -130,19 +130,23 @@ const CollapsedSystemName = Array.from(SystemName)[0]
 
 
       <!-- Side bar content -->
-      <template #default="collapsed">
+      <template #default="{ collapsed }">
 
         <!-- Top content -->
         <UNavigationMenu
+          :collapsed="collapsed"
           :items="sideItems[0]"
-          orientation="vertical"/>
+          orientation="vertical"
+        />
 
 
         <!-- Bottom content -->
-         <UNavigationMenu
+        <UNavigationMenu
+          :collapsed="collapsed"
           :items="sideItems[1]"
           orientation="vertical"
-          class="mt-auto"/>
+          class="mt-auto"
+        />
       </template>
     </UDashboardSidebar>
 
