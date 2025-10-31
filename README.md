@@ -10,30 +10,31 @@
 First, install the required dependencies if not installed
 
 ```bash
-  sudo apt update && sudo apt upgrade
-  sudo apt install nodejs
-  sudo apt install -g pm2
+sudo apt update && sudo apt upgrade
+sudo apt install nodejs
+sudo apt install -g pm2
 ```
 
 Now, let's install the project and start it.
 
 ```bash
-  wget -O https://github/...
+wget -O https://github.com/seb-dev-62/wol-rpi/releases/download/latest/wol-rpi.tar.gz
+tar -xvzf wol-rpi.tar.gz
 ```
 
 Then, let's start it
 
 ```bash
-  cd wol-rpi
-  pm2 start ./wol-rpi/server/index.mjs --name "wol-rpi"
-  pm2 save
-  pm2 startup
+cd wol-rpi
+pm2 start ./wol-rpi/server/index.mjs --name "wol-rpi"
+pm2 save
+pm2 startup
 ```
 
 Now, to access your server, just run
 
 ```bash
-  ifconfig
+ifconfig
 ```
 
 And in your browser, just do http://your-rpi-address and you're done.
