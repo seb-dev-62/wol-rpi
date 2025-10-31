@@ -36,4 +36,4 @@ Now, to access your server, just run
   ifconfig
 ```
 
-And in your browser, just do http://your-rpi-address and your done.
+And in your browser, just do http://your-rpi-address and you're done.
