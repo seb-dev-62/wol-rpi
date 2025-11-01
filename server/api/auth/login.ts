@@ -1,7 +1,9 @@
 import { H3Event } from 'h3'
-import { PrismaClient } from '@prisma/client'
+import pkg from '@prisma/client'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+
+const { PrismaClient } = pkg
 
 export default defineEventHandler(async (e: H3Event) => {
   const prisma = new PrismaClient()

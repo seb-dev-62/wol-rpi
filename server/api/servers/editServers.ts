@@ -1,7 +1,9 @@
 import { H3Event, readBody } from 'h3'
-import { PrismaClient } from '@prisma/client'
+import pkg from '@prisma/client'
 import { updateServerDate } from './refreshList'
 import { csrf_verif } from '#imports'
+
+const { PrismaClient } = pkg
 
 export default defineEventHandler(async (e: H3Event) => {
   const prisma = new PrismaClient
