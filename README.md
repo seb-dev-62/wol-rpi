@@ -36,16 +36,17 @@ npm run build
 ```
 
 4. A **.output** folder will be created (it's hidden, so don't be surprised if you don't see it.)
-Now, copy it to the home or wherever you want
+Now, go in
 
 ```bash
-cp -r .output ~/wol-rpi-build
-cd ~/wol-rpi-build
+cd .output
 ```
 
-5. Create the **.env** to use the back-end
+5. Create the **Database** and the **.env**
 
 ```bash
+mkdir -p ./db
+npx prisma db push --schema=../prisma/prisma.schema
 sudo nano .env
 ```
 
@@ -73,4 +74,4 @@ Now, to access your server, just run
 ifconfig
 ```
 
-And in your browser, just do http://<your-rpi-address> and you're done.
+And in your browser, just do http://<your-rpi-address>:3000 and you're done.
