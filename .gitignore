@@ -25,4 +25,4 @@ logs
 
 .data
 
-/prisma/prisma/server/db/*.db
+./prisma/prisma/server/db/*.db
