@@ -1,4 +1,4 @@
-import pkg from "@prisma/client/"
+import pkg from "@prisma/client"
 import { H3Event, readBody } from 'h3'
 import { csrf_verif } from "#imports"
 
