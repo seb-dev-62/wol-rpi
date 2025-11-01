@@ -49,14 +49,6 @@ cd ~/wol-rpi-build
 sudo nano .env
 ```
 
-6. Start the server with PM2
-
-```bash
-pm2 start ./server/index.mjs "wol-rpi-service"
-pm2 save
-pm2 startup
-```
-
 And past this, you may adjust according to your config
 For the **JWT_SECRET** create a 32 characters password
 (i.e: hcoYG$CpoJKa!AjpL#33axyFb@d#@6mH - do not use this exact password!)
@@ -65,6 +57,14 @@ For the **JWT_SECRET** create a 32 characters password
 ```bash
 DATABASE_URL="file:./db/init.db"
 JWT_SECRET="<Your secrete code>"
+```
+
+6. Start the server with PM2
+
+```bash
+pm2 start ./server/index.mjs --name "wol-rpi-service"
+pm2 save
+pm2 startup
 ```
 
 Now, to access your server, just run
