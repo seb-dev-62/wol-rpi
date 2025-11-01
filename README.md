@@ -35,15 +35,28 @@ npm install
 npm run build
 ```
 
-4. A .output folder will be created (it's hidden, so don't be surprised if you don't see it.)
-Now, we well copy it to the home or wherever you want.
+4. A **.output** folder will be created (it's hidden, so don't be surprised if you don't see it.)
+Now, copy it to the home or wherever you want
 
 ```bash
 cp -r .output ~/wol-rpi-build
 cd ~/wol-rpi-build
-pm2 start ./server/index.mjs --name "wol-rpi-service"
-pm2 save
-pm2 startup
+```
+
+5. Create the **.env** to use the back-end
+
+```bash
+sudo nano .env
+```
+
+And past this, you may adjust according to your config
+For the **JWT_SECRET** create a 32 characters password
+(i.e: hcoYG$CpoJKa!AjpL#33axyFb@d#@6mH - do not use this exact password!)
+[![A free password generator](https://www.lastpass.com/features/password-generator?utm_source=google&utm_medium=cpc&utm_campaign=19418169524&utm_term=password%20generator&utm_content=147367465160&gad_source=1&gad_campaignid=19418169524&gclid=Cj0KCQjw35bIBhDqARIsAGjd-cY_pxu_f8zQF8ZBezw-m_dQZIJKp59kKBKYSpbou0sdOGDQETMVXM0aAoFkEALw_wcB)]
+
+```bash
+DATABASE_URL="file:./db/init.db"
+JWT_SECRET="<Your secrete code>"
 ```
 
 Now, to access your server, just run
